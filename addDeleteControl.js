@@ -1,8 +1,10 @@
+import { showCurrentLayerInfo } from "./index.js";
 export default function addDeleteControl() {
   function deleteObject(eventData, transform) {
     const target = transform.target;
     const canvas = target.canvas;
     canvas.remove(target);
+    showCurrentLayerInfo();
     canvas.requestRenderAll();
   }
 

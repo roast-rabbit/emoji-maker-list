@@ -5,12 +5,137 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      img {
+        width: 36px;
+        height: 36px;
+      }
+      button {
+        border: none;
+        color: #ddd;
+        background-color: #666a82;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 5px;
+      }
+      button:hover {
+        cursor: pointer;
+        background-color: #3f4257;
+      }
+      ul {
+        border: 1px solid #ccc;
+        list-style: none;
+        border-radius: 5px;
+        padding: 0;
+      }
+      li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      li:last-child {
+        border-bottom: 0;
+      }
+      li:nth-child(odd) {
+        background-color: #f0f8ffdf;
+      }
+      li:hover {
+        cursor: pointer;
+        outline: 2px solid #aed3f6f7;
+      }
+      .main-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: start;
+        gap: 20px;
+      }
+      .draggable {
+        cursor: move;
+      }
+      .draggable.dragging {
+        opacity: 0.5;
+      }
+    </style>
   </head>
   <button id="toggle-pan">Toggle Pan</button>
   <button id="toggle-drawing">Toggle Drawing</button>
   <button id="to-json">To JSON</button>
   <button id="load-json">Load JSON</button>
-  <canvas id="c"></canvas>
+  <button id="clear-all">Clear all</button>
+  <div>
+    <div>Face 😏</div>
+    <button class="shape" data-name="face-0">
+      <img src="./assets/face/face-0.svg" alt="" />
+    </button>
+    <button class="shape" data-name="face-1">
+      <img src="./assets/face/face-1.svg" alt="" />
+    </button>
+    <div>Eyes 👀</div>
+    <button class="shape" data-name="eyes-0">
+      <img src="./assets/eyes/eyes-0.svg" alt="" />
+    </button>
+    <button class="shape" data-name="eyes-1">
+      <img src="./assets/eyes/eyes-1.svg" alt="" />
+    </button>
+    <button class="shape" data-name="eyes-2">
+      <img src="./assets/eyes/eyes-2.svg" alt="" />
+    </button>
+    <button class="shape" data-name="eyes-3">
+      <img src="./assets/eyes/eyes-3.svg" alt="" />
+    </button>
+    <div>Blush 😊</div>
+    <button class="shape" data-name="blush-0">
+      <img src="./assets/blush/blush-0.svg" alt="" />
+    </button>
+    <div>Mouth 👄</div>
+    <button class="shape" data-name="mouth-0">
+      <img src="./assets/mouth/mouth-0.svg" alt="" />
+    </button>
+    <button class="shape" data-name="mouth-1">
+      <img src="./assets/mouth/mouth-1.svg" alt="" />
+    </button>
+    <button class="shape" data-name="mouth-2">
+      <img src="./assets/mouth/mouth-2.svg" alt="" />
+    </button>
+    <button class="shape" data-name="mouth-3">
+      <img src="./assets/mouth/mouth-3.svg" alt="" />
+    </button>
+    <button class="shape" data-name="mouth-4">
+      <img src="./assets/mouth/mouth-4.svg" alt="" />
+    </button>
+    <button class="shape" data-name="mouth-5">
+      <img src="./assets/mouth/mouth-5.svg" alt="" />
+    </button>
+    <button class="shape" data-name="mouth-6">
+      <img src="./assets/mouth/mouth-6.svg" alt="" />
+    </button>
+    <div>droplet💧</div>
+    <button class="shape" data-name="droplet-0">
+      <img src="./assets/droplet/droplet-0.svg" alt="" />
+    </button>
+    <div>hat🎩</div>
+    <button class="shape" data-name="hat-0">
+      <img src="./assets/hat/hat-0.svg" alt="" />
+    </button>
+    <div>decorations</div>
+    <button class="shape" data-name="decorations-0">
+      <img src="./assets/decorations/decorations-0.svg" alt="" />
+    </button>
+    <button class="shape" data-name="decorations-1">
+      <img src="./assets/decorations/decorations-1.svg" alt="" />
+    </button>
+    <button class="shape" data-name="decorations-2">
+      <img src="./assets/decorations/decorations-2.svg" alt="" />
+    </button>
+    <br />
+  </div>
+  <div class="main-container">
+    <canvas id="c"></canvas>
+    <ul id="layer-list"></ul>
+  </div>
   <script src="fabric.js"></script>
 
   <script type="module" src="index.js"></script>
