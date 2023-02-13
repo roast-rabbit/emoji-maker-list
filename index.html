@@ -10,6 +10,13 @@
         margin: 0;
         box-sizing: border-box;
       }
+      body {
+        background-color: #363848;
+      }
+      #container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
       img {
         width: 36px;
         height: 36px;
@@ -60,81 +67,84 @@
       }
     </style>
   </head>
-  <button id="toggle-pan">Toggle Pan</button>
-  <button id="toggle-drawing">Toggle Drawing</button>
-  <button id="to-json">To JSON</button>
-  <button id="load-json">Load JSON</button>
-  <button id="clear-all">Clear all</button>
-  <div>
-    <div>Face 😏</div>
-    <button class="shape" data-name="face-0">
-      <img src="./assets/face/face-0.svg" alt="" />
-    </button>
-    <button class="shape" data-name="face-1">
-      <img src="./assets/face/face-1.svg" alt="" />
-    </button>
-    <div>Eyes 👀</div>
-    <button class="shape" data-name="eyes-0">
-      <img src="./assets/eyes/eyes-0.svg" alt="" />
-    </button>
-    <button class="shape" data-name="eyes-1">
-      <img src="./assets/eyes/eyes-1.svg" alt="" />
-    </button>
-    <button class="shape" data-name="eyes-2">
-      <img src="./assets/eyes/eyes-2.svg" alt="" />
-    </button>
-    <button class="shape" data-name="eyes-3">
-      <img src="./assets/eyes/eyes-3.svg" alt="" />
-    </button>
-    <div>Blush 😊</div>
-    <button class="shape" data-name="blush-0">
-      <img src="./assets/blush/blush-0.svg" alt="" />
-    </button>
-    <div>Mouth 👄</div>
-    <button class="shape" data-name="mouth-0">
-      <img src="./assets/mouth/mouth-0.svg" alt="" />
-    </button>
-    <button class="shape" data-name="mouth-1">
-      <img src="./assets/mouth/mouth-1.svg" alt="" />
-    </button>
-    <button class="shape" data-name="mouth-2">
-      <img src="./assets/mouth/mouth-2.svg" alt="" />
-    </button>
-    <button class="shape" data-name="mouth-3">
-      <img src="./assets/mouth/mouth-3.svg" alt="" />
-    </button>
-    <button class="shape" data-name="mouth-4">
-      <img src="./assets/mouth/mouth-4.svg" alt="" />
-    </button>
-    <button class="shape" data-name="mouth-5">
-      <img src="./assets/mouth/mouth-5.svg" alt="" />
-    </button>
-    <button class="shape" data-name="mouth-6">
-      <img src="./assets/mouth/mouth-6.svg" alt="" />
-    </button>
-    <div>droplet💧</div>
-    <button class="shape" data-name="droplet-0">
-      <img src="./assets/droplet/droplet-0.svg" alt="" />
-    </button>
-    <div>hat🎩</div>
-    <button class="shape" data-name="hat-0">
-      <img src="./assets/hat/hat-0.svg" alt="" />
-    </button>
-    <div>decorations</div>
-    <button class="shape" data-name="decorations-0">
-      <img src="./assets/decorations/decorations-0.svg" alt="" />
-    </button>
-    <button class="shape" data-name="decorations-1">
-      <img src="./assets/decorations/decorations-1.svg" alt="" />
-    </button>
-    <button class="shape" data-name="decorations-2">
-      <img src="./assets/decorations/decorations-2.svg" alt="" />
-    </button>
-    <br />
-  </div>
-  <div class="main-container">
-    <canvas id="c"></canvas>
-    <ul id="layer-list"></ul>
+
+  <div id="container">
+    <section id="control-panel">
+      <button id="toggle-pan">Toggle Pan</button>
+      <button id="toggle-drawing">Toggle Drawing</button>
+      <button id="to-json">To JSON</button>
+      <button id="load-json">Load JSON</button>
+      <button id="clear-all">Clear all</button>
+      <button id="set-transparent-background">Set transparent background Color</button>
+      <div>Face 😏</div>
+      <button class="shape" data-name="face-0">
+        <img src="./assets/face/face-0.svg" alt="" />
+      </button>
+      <button class="shape" data-name="face-1">
+        <img src="./assets/face/face-1.svg" alt="" />
+      </button>
+      <div>Eyes 👀</div>
+      <button class="shape" data-name="eyes-0">
+        <img src="./assets/eyes/eyes-0.svg" alt="" />
+      </button>
+      <button class="shape" data-name="eyes-1">
+        <img src="./assets/eyes/eyes-1.svg" alt="" />
+      </button>
+      <button class="shape" data-name="eyes-2">
+        <img src="./assets/eyes/eyes-2.svg" alt="" />
+      </button>
+      <button class="shape" data-name="eyes-3">
+        <img src="./assets/eyes/eyes-3.svg" alt="" />
+      </button>
+      <div>Blush 😊</div>
+      <button class="shape" data-name="blush-0">
+        <img src="./assets/blush/blush-0.svg" alt="" />
+      </button>
+      <div>Mouth 👄</div>
+      <button class="shape" data-name="mouth-0">
+        <img src="./assets/mouth/mouth-0.svg" alt="" />
+      </button>
+      <button class="shape" data-name="mouth-1">
+        <img src="./assets/mouth/mouth-1.svg" alt="" />
+      </button>
+      <button class="shape" data-name="mouth-2">
+        <img src="./assets/mouth/mouth-2.svg" alt="" />
+      </button>
+      <button class="shape" data-name="mouth-3">
+        <img src="./assets/mouth/mouth-3.svg" alt="" />
+      </button>
+      <button class="shape" data-name="mouth-4">
+        <img src="./assets/mouth/mouth-4.svg" alt="" />
+      </button>
+      <button class="shape" data-name="mouth-5">
+        <img src="./assets/mouth/mouth-5.svg" alt="" />
+      </button>
+      <button class="shape" data-name="mouth-6">
+        <img src="./assets/mouth/mouth-6.svg" alt="" />
+      </button>
+      <div>droplet💧</div>
+      <button class="shape" data-name="droplet-0">
+        <img src="./assets/droplet/droplet-0.svg" alt="" />
+      </button>
+      <div>hat🎩</div>
+      <button class="shape" data-name="hat-0">
+        <img src="./assets/hat/hat-0.svg" alt="" />
+      </button>
+      <div>decorations</div>
+      <button class="shape" data-name="decorations-0">
+        <img src="./assets/decorations/decorations-0.svg" alt="" />
+      </button>
+      <button class="shape" data-name="decorations-1">
+        <img src="./assets/decorations/decorations-1.svg" alt="" />
+      </button>
+      <button class="shape" data-name="decorations-2">
+        <img src="./assets/decorations/decorations-2.svg" alt="" />
+      </button>
+    </section>
+    <section class="main-container">
+      <canvas id="c"></canvas>
+      <ul id="layer-list"></ul>
+    </section>
   </div>
   <script src="fabric.js"></script>
 

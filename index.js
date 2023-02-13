@@ -9,7 +9,7 @@ import { makeListItemsDraggable } from "./dragDrop.js";
 /**
  *
  * @param {string} id
- * @returns
+ * @returns new canvas object
  */
 const initCanvas = (id) => {
   return new fabric.Canvas(id, {
@@ -24,16 +24,17 @@ const initCanvas = (id) => {
 
 let canvas = initCanvas("c");
 
-export let layerData;
-
 addDeleteControl();
 alterRotationControl(canvas);
 alterScaleControl(canvas);
 
 loadSVGs(canvas);
 
+// layerData is a global object keeping track when all the layer info changes
+export let layerData;
+
 export function setLayerData(newLayerData, newOrder = [0]) {
-  // only update order
+  // order changes, only update order
   if (!newLayerData) {
     const currentObjects = canvas.getObjects();
     const objectsToSet = newOrder.map((index) => {
@@ -41,7 +42,7 @@ export function setLayerData(newLayerData, newOrder = [0]) {
     });
     layerData = objectsToSet;
   } else {
-    console.log(canvas.getObjects());
+    // layer data changes
     layerData = canvas.getObjects();
   }
 }
@@ -165,7 +166,7 @@ loadJSONBtn.addEventListener("click", () => {
   });
 });
 
-// Add an event listener to the document object to listen to the delete key pressed(in windows it's "Backspace" key, in mac it's named "delete"), and it will delete current selected obejct on canvas
+// Add an event listener to the document object to listen to the delete key pressed (in Windows it's named "Backspace" key, in mac it's named "delete"), and it will delete current selected obejct on canvas
 document.addEventListener("keydown", function (event) {
   const { key } = event;
   if (key === "Backspace") {
@@ -181,7 +182,7 @@ export function showCurrentLayerInfo(layerData, newOrder) {
     layerList.insertAdjacentHTML(
       "beforeend",
       `<li style="display: flex; align-items: center; height:60px; gap:10px" data-index=${
-        newOrder ? newOrder[index] : index
+        newOrder?.[index] || index
       } class="draggable" draggable="true">
           <div><img style="object-fit: cover; height:100%" src="${obejct.toDataURL()}"/></div>
           <div>layer ${index + 1}</div>
@@ -198,6 +199,12 @@ export function removeActiveObject() {
 
 document.querySelector("#clear-all").addEventListener("click", () => {
   canvas.remove(...canvas.getObjects());
+  setLayerData();
+  showCurrentLayerInfo(layerData);
+});
+
+document.querySelector("#set-transparent-background").addEventListener("click", () => {
+  canvas.setBackgroundColor(null, canvas.renderAll.bind(canvas));
 });
 
 export function getCurrentOrder() {
