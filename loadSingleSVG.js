@@ -1,5 +1,11 @@
-import { setLayerData, showCurrentLayerInfo, layerData } from "./index.js";
+import {
+  setLayerData,
+  showCurrentLayerInfo,
+  showSelectionOnLayerInfoList,
+  layerData,
+} from "./index.js";
 import { getCurrentOrder } from "./index.js";
+import { updateHistory } from "./undo.js";
 
 export default function (fileName, canvas, positionData) {
   const path = "./assets";
@@ -25,10 +31,10 @@ export default function (fileName, canvas, positionData) {
     item.left = leftOffset + left;
     canvas.add(item);
     // re-render current layer info eveytime it adds an object to the canvas
-    console.log("canvas.getObjects:");
-    console.log(canvas.getObjects());
     setLayerData(canvas.getObjects());
-    console.log(layerData);
+
     showCurrentLayerInfo(layerData);
+    showSelectionOnLayerInfoList();
+    updateHistory();
   });
 }

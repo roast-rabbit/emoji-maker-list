@@ -1,4 +1,4 @@
-import { layerData, setLayerData, updateCanvas } from "./index.js";
+import { layerData, setActiveObjectOnCanvas, setLayerData, updateCanvas } from "./index.js";
 const container = document.querySelector("#layer-list");
 
 const swap = function (nodeA, nodeB) {
@@ -26,6 +26,10 @@ container.addEventListener("drop", () => {
   listElements.forEach((element, index) => {
     element.dataset.index = index;
   });
+
+  const selectedLayerIndex = document.querySelector("li.active")?.dataset.index;
+
+  selectedLayerIndex && setActiveObjectOnCanvas(selectedLayerIndex);
 });
 
 container.addEventListener("dragover", (e) => {
@@ -62,7 +66,6 @@ function getDragAfterElement(container, y) {
 
   const ulHeight = document.querySelector("ul").getBoundingClientRect().y;
   const index = Math.floor((y - ulHeight) / 60);
-  console.log(index);
   return draggableElements[index];
 
   // return draggableElements.reduce(

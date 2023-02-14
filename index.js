@@ -5,6 +5,7 @@ import loadSVGs from "./loadSVGs.js";
 import loadSingleSVG from "./loadSingleSVG.js";
 import alterScaleControl from "./alterScaleControl.js";
 import { makeListItemsDraggable } from "./dragDrop.js";
+import { updateHistory, undo, redo } from "./undo.js";
 
 /**
  *
@@ -22,7 +23,7 @@ const initCanvas = (id) => {
   });
 };
 
-let canvas = initCanvas("c");
+export let canvas = initCanvas("c");
 
 addDeleteControl();
 alterRotationControl(canvas);
@@ -53,6 +54,7 @@ export function updateCanvas(newLayerData) {
   newLayerData.forEach((layer) => {
     canvas.add(layer);
   });
+  updateHistory();
 }
 
 // positionData object holds value read from positionData.json file
@@ -181,7 +183,7 @@ export function showCurrentLayerInfo(layerData, newOrder) {
   obejcts.forEach((obejct, index) => {
     layerList.insertAdjacentHTML(
       "beforeend",
-      `<li style="display: flex; align-items: center; height:60px; gap:10px" data-index=${
+      `<li style="display: flex; align-items: center; height:60px; gap:10px;" data-index=${
         newOrder?.[index] || index
       } class="draggable" draggable="true">
           <div><img style="object-fit: cover; height:100%" src="${obejct.toDataURL()}"/></div>
@@ -207,6 +209,14 @@ document.querySelector("#set-transparent-background").addEventListener("click", 
   canvas.setBackgroundColor(null, canvas.renderAll.bind(canvas));
 });
 
+document.getElementById("undo").addEventListener("click", () => {
+  undo();
+});
+
+document.querySelector("#redo").addEventListener("click", () => {
+  redo();
+});
+
 export function getCurrentOrder() {
   const layers = document.querySelectorAll("li");
   if (layers.length !== 0) {
@@ -217,3 +227,43 @@ export function getCurrentOrder() {
     return [0];
   }
 }
+
+function onObjectSelected(e) {
+  showSelectionOnLayerInfoList();
+}
+
+export function showSelectionOnLayerInfoList() {
+  const selectedObject = canvas.getActiveObject();
+  const selectedObjectIndex = canvas.getObjects().indexOf(selectedObject);
+
+  const layerInfoList = document.querySelectorAll("li");
+  layerInfoList.forEach((item) => {
+    item.classList.remove("active");
+  });
+  console.log(selectedObjectIndex);
+  if (selectedObjectIndex < 0) return;
+  [...layerInfoList][selectedObjectIndex].classList.add("active");
+}
+canvas.on("selection:created", onObjectSelected);
+canvas.on("selection:updated", onObjectSelected);
+
+// canvas.on("object:added", () => {
+//   updateHistory();
+// });
+canvas.on("object:modified", () => {
+  updateHistory();
+});
+// canvas.on("object:removed", () => {
+//   updateHistory();
+// });
+
+export function setActiveObjectOnCanvas(indexToSet) {
+  canvas.setActiveObject(canvas.item(indexToSet));
+  canvas.renderAll();
+}
+
+document.querySelector("ul").addEventListener("click", (e) => {
+  const selectedLayer = e.target.closest("li");
+  const selectedLayerIndex = selectedLayer.dataset.index;
+  setActiveObjectOnCanvas(selectedLayerIndex);
+});

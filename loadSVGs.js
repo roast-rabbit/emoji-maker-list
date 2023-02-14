@@ -1,4 +1,6 @@
 import { setLayerData, layerData, showCurrentLayerInfo } from "./index.js";
+import { updateHistory } from "./undo.js";
+
 export default function (canvas) {
   const path = "./assets";
   const topOffset = 50;
@@ -26,6 +28,7 @@ export default function (canvas) {
     setLayerData(canvas.getObjects());
     console.log(layerData);
     showCurrentLayerInfo(layerData);
+    updateHistory();
   });
 
   // fetch("./positionData.json")

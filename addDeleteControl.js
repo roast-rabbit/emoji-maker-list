@@ -1,4 +1,5 @@
 import { showCurrentLayerInfo } from "./index.js";
+import { updateHistory } from "./undo.js";
 export default function addDeleteControl() {
   function deleteObject(eventData, transform) {
     const target = transform.target;
@@ -6,6 +7,7 @@ export default function addDeleteControl() {
     canvas.remove(target);
     showCurrentLayerInfo();
     canvas.requestRenderAll();
+    updateHistory();
   }
 
   function renderIcon(ctx, left, top, styleOverride, fabricObject) {

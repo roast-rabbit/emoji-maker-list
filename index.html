@@ -9,6 +9,8 @@
       * {
         margin: 0;
         box-sizing: border-box;
+        color: #ddd;
+        font: 1em sans-serif;
       }
       body {
         background-color: #363848;
@@ -49,9 +51,18 @@
       li:nth-child(odd) {
         background-color: #f0f8ffdf;
       }
+      li:nth-child(even) {
+        background-color: #fff;
+      }
       li:hover {
         cursor: pointer;
         outline: 2px solid #aed3f6f7;
+      }
+      li.active {
+        outline: 4px solid #2286e3f7;
+      }
+      li div {
+        color: #363848;
       }
       .main-container {
         display: flex;
@@ -76,6 +87,8 @@
       <button id="load-json">Load JSON</button>
       <button id="clear-all">Clear all</button>
       <button id="set-transparent-background">Set transparent background Color</button>
+      <button id="undo">Undo</button>
+      <button id="redo">Redo</button>
       <div>Face 😏</div>
       <button class="shape" data-name="face-0">
         <img src="./assets/face/face-0.svg" alt="" />
@@ -130,7 +143,7 @@
       <button class="shape" data-name="hat-0">
         <img src="./assets/hat/hat-0.svg" alt="" />
       </button>
-      <div>decorations</div>
+      <div>decorations🎄</div>
       <button class="shape" data-name="decorations-0">
         <img src="./assets/decorations/decorations-0.svg" alt="" />
       </button>
