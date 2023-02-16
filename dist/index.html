@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>* {
+  box-sizing: border-box;
+  color: #ddd;
+  margin: 0;
+  font: 1em sans-serif;
+}
+
+body {
+  background-color: #363848;
+}
+
+#container {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+}
+
+img {
+  width: 36px;
+  height: 36px;
+}
+
+button {
+  color: #ddd;
+  background-color: #666a82;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #3f4257;
+}
+
+ul {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+li:last-child {
+  border-bottom: 0;
+}
+
+li:nth-child(2n+1) {
+  background-color: #f0f8ffdf;
+}
+
+li:nth-child(2n) {
+  background-color: #fff;
+}
+
+li:hover {
+  cursor: pointer;
+  outline: 2px solid #aed3f6f7;
+}
+
+li.active {
+  outline: 4px solid #2286e3f7;
+}
+
+li div {
+  color: #363848;
+}
+
+.main-container {
+  justify-content: flex-start;
+  align-items: start;
+  gap: 20px;
+  display: flex;
+}
+
+.draggable {
+  cursor: move;
+}
+
+.draggable.dragging {
+  opacity: .5;
+}
+
+@media screen and (max-width: 400px) {
+  #container, .main-container {
+    display: block;
+  }
+}
+
+</style>
+  </head>
+
+  <div id="container">
+    <section id="control-panel">
+      <button id="toggle-pan">Toggle Pan</button>
+      <button id="toggle-drawing">Toggle Drawing</button>
+      <button id="to-json">To JSON</button>
+      <button id="load-json">Load JSON</button>
+      <button id="clear-all">Clear all</button>
+      <button id="set-transparent-background">Set transparent background Color</button>
+      <button id="undo">Undo</button>
+      <button id="redo">Redo</button>
+      <input id="text"> <input type="color" name="" id="text-color">
+      <button id="add-text-to-canvas">Add text to canvas</button>
+      <div>Face 😏</div>
+      <button class="shape" data-name="face-0">
+        <img src="/face-0.1b6e70dc.svg" alt="">
+      </button>
+      <button class="shape" data-name="face-1">
+        <img src="/face-1.50f8e9b8.svg" alt="">
+      </button>
+      <div>Eyes 👀</div>
+      <button class="shape" data-name="eyes-0">
+        <img src="/eyes-0.43936844.svg" alt="">
+      </button>
+      <button class="shape" data-name="eyes-1">
+        <img src="/eyes-1.f9b8df8b.svg" alt="">
+      </button>
+      <button class="shape" data-name="eyes-2">
+        <img src="/eyes-2.9375cf51.svg" alt="">
+      </button>
+      <button class="shape" data-name="eyes-3">
+        <img src="/eyes-3.56b599b5.svg" alt="">
+      </button>
+      <button class="shape" data-name="eyes-4">
+        <img src="/eyes-4.71f1aa2f.svg" alt="">
+      </button>
+      <div>Blush 😊</div>
+      <button class="shape" data-name="blush-0">
+        <img src="/blush-0.4ce6b7a8.svg" alt="">
+      </button>
+      <div>Mouth 👄</div>
+      <button class="shape" data-name="mouth-0">
+        <img src="/mouth-0.3456c7a9.svg" alt="">
+      </button>
+      <button class="shape" data-name="mouth-1">
+        <img src="/mouth-1.d17b0d95.svg" alt="">
+      </button>
+      <button class="shape" data-name="mouth-2">
+        <img src="/mouth-2.97daddf9.svg" alt="">
+      </button>
+      <button class="shape" data-name="mouth-3">
+        <img src="/mouth-3.3b83f93b.svg" alt="">
+      </button>
+      <button class="shape" data-name="mouth-4">
+        <img src="/mouth-4.3dda8fcf.svg" alt="">
+      </button>
+      <button class="shape" data-name="mouth-5">
+        <img src="/mouth-5.b727e1d5.svg" alt="">
+      </button>
+      <button class="shape" data-name="mouth-6">
+        <img src="/mouth-6.399ef584.svg" alt="">
+      </button>
+      <button class="shape" data-name="mouth-7">
+        <img src="/mouth-7.14441702.svg" alt="">
+      </button>
+      <button class="shape" data-name="mouth-8">
+        <img src="/mouth-8.d2d47343.svg" alt="">
+      </button>
+      <div>droplet💧</div>
+      <button class="shape" data-name="droplet-0">
+        <img src="/droplet-0.42b44bb1.svg" alt="">
+      </button>
+      <div>hat🎩</div>
+      <button class="shape" data-name="hat-0">
+        <img src="/hat-0.77d6fe21.svg" alt="">
+      </button>
+      <div>decorations🎄</div>
+      <button class="shape" data-name="decorations-0">
+        <img src="/decorations-0.0fd3c2b7.svg" alt="">
+      </button>
+      <button class="shape" data-name="decorations-1">
+        <img src="/decorations-1.226dd393.svg" alt="">
+      </button>
+      <button class="shape" data-name="decorations-2">
+        <img src="/decorations-2.ffd616a7.svg" alt="">
+      </button>
+      <button class="shape" data-name="decorations-3">
+        <img src="/decorations-3.bf342e7b.svg" alt="">
+      </button>
+    </section>
+    <section class="main-container">
+      <canvas id="c"></canvas>
+      <ul id="layer-list"></ul>
+    </section>
+  </div>
+  <!-- <script src="fabric.js"></script> -->
+
+  <script src="/index.3d214d75.js" defer=""></script>
+  <body></body>
+</html>

@@ -6,7 +6,8 @@ import loadSingleSVG from "./loadSingleSVG.js";
 import alterScaleControl from "./alterScaleControl.js";
 import { makeListItemsDraggable } from "./dragDrop.js";
 import { updateHistory, undo, redo } from "./undo.js";
-
+// import { fabric } from "fabric";
+import "./text.js";
 /**
  *
  * @param {string} id
@@ -172,7 +173,9 @@ loadJSONBtn.addEventListener("click", () => {
 document.addEventListener("keydown", function (event) {
   const { key } = event;
   if (key === "Backspace") {
-    removeActiveObject();
+    if (!canvas.getActiveObject()?.text) {
+      removeActiveObject();
+    }
   }
 });
 
@@ -182,12 +185,12 @@ export function showCurrentLayerInfo(layerData, newOrder) {
   const obejcts = layerData ? layerData : canvas.getObjects();
   obejcts.forEach((obejct, index) => {
     layerList.insertAdjacentHTML(
-      "beforeend",
+      "afterbegin",
       `<li style="display: flex; align-items: center; height:60px; gap:10px;" data-index=${
         newOrder?.[index] || index
       } class="draggable" draggable="true">
-          <div><img style="object-fit: cover; height:100%" src="${obejct.toDataURL()}"/></div>
-          <div>layer ${index + 1}</div>
+          <div><img style="object-fit: contain; height:80%" src="${obejct.toDataURL()}"/></div>
+          <div>Layer ${obejcts.length - index}</div>
       </li>`
     );
   });
@@ -242,20 +245,14 @@ export function showSelectionOnLayerInfoList() {
   });
   console.log(selectedObjectIndex);
   if (selectedObjectIndex < 0) return;
-  [...layerInfoList][selectedObjectIndex].classList.add("active");
+  [...layerInfoList].reverse()[selectedObjectIndex].classList.add("active");
 }
 canvas.on("selection:created", onObjectSelected);
 canvas.on("selection:updated", onObjectSelected);
 
-// canvas.on("object:added", () => {
-//   updateHistory();
-// });
 canvas.on("object:modified", () => {
   updateHistory();
 });
-// canvas.on("object:removed", () => {
-//   updateHistory();
-// });
 
 export function setActiveObjectOnCanvas(indexToSet) {
   canvas.setActiveObject(canvas.item(indexToSet));
