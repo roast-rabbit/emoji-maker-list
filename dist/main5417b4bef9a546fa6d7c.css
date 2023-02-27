@@ -1,0 +1,131 @@
+/*!**********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/styles.css ***!
+  \**********************************************************************/
+#container button:hover {
+  cursor: pointer;
+}
+
+#container button img {
+  width: 30px;
+  height: 30px;
+}
+#container button {
+  appearance: none;
+}
+#container .small.truncate.d-block {
+  font-size: 75%;
+}
+.dark-mode #container svg {
+  fill: #edf2f6;
+}
+
+#container button.active {
+  background-color: #363848;
+}
+
+#container ul {
+  position: relative;
+  /* border: 1px solid #ccc; */
+  list-style: none;
+  border-radius: 5px;
+  padding: 0;
+}
+
+#container li:last-child {
+  border-bottom: 0;
+}
+#container li:nth-child(odd) {
+  background-color: #f0f8ffdf;
+}
+#container li:nth-child(even) {
+  background-color: #fff;
+}
+.dark-mode #container li:nth-child(odd) {
+  background-color: transparent;
+}
+.dark-mode #container li:nth-child(even) {
+  background-color: rgb(0 0 0 / 10%);
+}
+#container li:hover {
+  cursor: pointer;
+  outline: 2px solid #aed3f6f7;
+}
+#container li.active {
+  outline: 2px solid #2286e3f7;
+}
+/* #container li div {
+  color: #363848;
+} */
+
+#container li img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+#container .main-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  gap: 20px;
+}
+#container .draggable {
+  cursor: move;
+}
+#container .draggable.dragging {
+  opacity: 0.5;
+}
+.tab:hover {
+  cursor: pointer;
+}
+.tab.active {
+  background-color: var(--bg_03);
+}
+.tab-content {
+  display: none;
+  height: 240px;
+  overflow-y: scroll;
+}
+.tab-content#layer-list {
+  min-height: 240px;
+  height: auto;
+  overflow-y: initial;
+}
+.tab-content.active {
+  display: block;
+}
+.secondary-tab:hover{
+  cursor: pointer;
+}
+.secondary-tab.active {
+  background-color: rgb(197, 223, 245);
+}
+
+.secondary-tab-content.active {
+  display: block;
+}
+.secondary-tab-content {
+  display: none;
+}
+
+#container input[type="color"],
+#container input[type="range"] {
+  color: initial !important;
+  height: auto !important;
+  border-radius: initial !important;
+  padding: initial !important;
+  background-color: transparent !important;
+}
+
+@media screen and (max-width: 992px) {
+  .menu-nav > .col-auto {
+    width: 20%;
+  }
+}
+@media screen and (min-width: 992px) {
+  #container .tab {
+    min-width: 7rem;
+  }
+}
+
+
+/*# sourceMappingURL=main5417b4bef9a546fa6d7c.css.map*/
