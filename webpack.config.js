@@ -48,7 +48,7 @@ const config = {
     // }),
   ],
   // mode: "production",
-  devtool: "inline-source-map",
+  // devtool: "inline-source-map",
   watch: true,
   devServer: {
     port: 8080,
