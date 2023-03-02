@@ -31392,17 +31392,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.js */ "./src/index.js");
 
 
-function downloadURI(uri, name) {
-  var link = document.createElement("a");
+function savePng(uri, name) {
+  const link = document.createElement("a");
+
   link.download = name;
+
   link.href = uri;
+
   document.body.appendChild(link);
+
   link.click();
+
   document.body.removeChild(link);
 }
 
-document.getElementById("download").addEventListener("click", () => {
-  downloadURI(_index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.toDataURL(), "doanload");
+function saveSvg(filedata, name = "my_svg") {
+  const svgFile = new Blob([filedata], { type: "image/svg+xml;charset=utf-8" });
+
+  const svgFileSrc = URL.createObjectURL(svgFile); //mylocfile);
+
+  const dwn = document.createElement("a");
+
+  dwn.href = svgFileSrc;
+
+  dwn.download = name;
+
+  document.body.appendChild(dwn);
+
+  dwn.click();
+
+  document.body.removeChild(dwn);
+}
+
+document.getElementById("to-png").addEventListener("click", () => {
+  savePng(_index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.toDataURL(), "download");
+});
+
+document.getElementById("to-svg").addEventListener("click", () => {
+  saveSvg(_index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.toSVG());
 });
 
 
@@ -31602,6 +31629,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "modes": () => (/* binding */ modes)
 /* harmony export */ });
 /* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.js */ "./src/index.js");
+/* harmony import */ var _undo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./undo.js */ "./src/undo.js");
+
 
 let currentMode = "";
 
@@ -31609,10 +31638,14 @@ const drawingLineWidthSelector = document.querySelector("#drawing-line-width");
 const drawingColorSelector = document.querySelector("#drawing-color");
 const doodleBtn = document.querySelector("#doodle");
 
+
+
 // drawingLineWidthSelector.style.display = "none";
 // drawingColorSelector.style.display = "none";
 
 let drawingColor = drawingColorSelector.value;
+document.querySelector('label[for="drawing-color"]').style = `border:1px solid ${drawingColor}`;
+
 let drawingLineWidth = drawingLineWidthSelector.value;
 
 drawingLineWidthSelector.addEventListener("change", function (e) {
@@ -31623,6 +31656,7 @@ drawingLineWidthSelector.addEventListener("change", function (e) {
 
 drawingColorSelector.addEventListener("change", (e) => {
   drawingColor = e.target.value;
+  document.querySelector('label[for="drawing-color"]').style = `border:1px solid ${drawingColor}`;
   _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.freeDrawingBrush.color = drawingColor;
 });
 
@@ -31630,38 +31664,15 @@ const modes = {
   drawing: "drawing",
 };
 
-// const toggleMode = function (modeToToggle) {
-//   canvas.isDrawingMode = false;
-
-//   if (modeToToggle === modes.drawing) {
-//     if (currentMode === modes.drawing) {
-//       currentMode = "";
-//       this.classList.remove("active");
-
-//       drawingLineWidthSelector.style.display = "none";
-//       drawingColorSelector.style.display = "none";
-//       // this.style.backgroundColor = "#fff";
-//     } else {
-//       this.classList.add("active");
-//       canvas.freeDrawingBrush.width = parseInt(drawingLineWidth, 10) || 1;
-//       canvas.freeDrawingBrush.color = drawingColor;
-//       drawingLineWidthSelector.style.display = "inline-block";
-//       drawingColorSelector.style.display = "inline-block";
-//       currentMode = modes.drawing;
-//       canvas.isDrawingMode = true;
-//       canvas.renderAll();
-//       // this.style.backgroundColor = "#ccc";
-//     }
-//   }
-// };
-
 doodleBtn.addEventListener("click", function () {
+  document.querySelector("#doodle-active-icon").classList.remove("hide");
   _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.freeDrawingBrush.width = parseInt(drawingLineWidth, 10) || 1;
   _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.freeDrawingBrush.color = drawingColor;
   // drawingLineWidthSelector.style.display = "inline-block";
   // drawingColorSelector.style.display = "inline-block";
   currentMode = modes.drawing;
   _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.isDrawingMode = true;
+
   _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.renderAll();
 });
 
@@ -31926,6 +31937,11 @@ function showSelectionOnLayerInfoList() {
 canvas.on("selection:created", onObjectSelected);
 canvas.on("selection:updated", onObjectSelected);
 
+// 画画时，每画一笔就更新一次历史数据
+canvas.on("path:created", () => {
+  (0,_undo_js__WEBPACK_IMPORTED_MODULE_7__.updateHistory)();
+});
+
 canvas.on("object:modified", () => {
   setLayerData(canvas.getObjects());
   showCurrentLayerInfo();
@@ -32071,14 +32087,23 @@ const addTextToCanvas = document.querySelector("#add-text-to-canvas");
 
 let color = "#000";
 const textColor = document.querySelector("#text-color");
+
+console.log(document.querySelector('label[for="text-color"]'));
+
+document.querySelector('label[for="text-color"]').style = `border:1px solid ${color}`;
+
 let textToAdd;
 
 textColor.addEventListener("input", (e) => {
   [textToAdd] = _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.getObjects().filter((object) => object.type === "i-text");
-  console.log(textToAdd);
+
+  textColor.style = "border:1px solid black";
   color = e.target.value;
+  document.querySelector('label[for="text-color"]').style = `border:1px solid ${color}`;
 
   if (textToAdd) {
+    textColor.style.border = `1px solid ${color}`;
+
     textToAdd.set({ fill: color });
     _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.renderAll();
     (0,_index_js__WEBPACK_IMPORTED_MODULE_0__.setLayerData)(_index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.getObjects());
@@ -32089,11 +32114,8 @@ textColor.addEventListener("input", (e) => {
   }
 });
 
-// input.addEventListener("input", (e) => {
-//   text = input.value;
-// });
-
 addTextToCanvas.addEventListener("click", () => {
+  document.querySelector('#text-active-icon').classList.remove('hide')
   if (!textToAdd) {
     textToAdd = new fabric.IText(" ", {
       fontSize: 24,
@@ -32101,7 +32123,7 @@ addTextToCanvas.addEventListener("click", () => {
       fontFamily: "Helvetica",
       fill: color,
       strokeWidth: 3,
-      top: 200,
+      top: 250,
       left: 100,
       onCanvasEditing: true,
       borderColor: "#0c8ce9",
@@ -32114,7 +32136,6 @@ addTextToCanvas.addEventListener("click", () => {
     textToAdd.enterEditing();
 
     _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.on("text:changed", function (e) {
-      console.log(_index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.getObjects());
       (0,_index_js__WEBPACK_IMPORTED_MODULE_0__.setLayerData)(_index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.getObjects());
 
       (0,_index_js__WEBPACK_IMPORTED_MODULE_0__.showCurrentLayerInfo)(_index_js__WEBPACK_IMPORTED_MODULE_0__.layerData);
@@ -32122,8 +32143,6 @@ addTextToCanvas.addEventListener("click", () => {
       (0,_undo_js__WEBPACK_IMPORTED_MODULE_1__.updateHistory)();
       _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.setActiveObject(textToAdd);
     });
-    // canvas.setActiveObject(textToAdd);
-    // canvas.renderAll();
   }
 });
 
@@ -32153,8 +32172,10 @@ let currentOpenningLabel = document.querySelector(".tab.active");
 
 tabs.forEach((tab) => {
   tab.addEventListener("click", function () {
+    document.querySelector("#text-active-icon").classList.add("hide");
+
     if (_index__WEBPACK_IMPORTED_MODULE_0__.canvas.isDrawingMode === true) {
-      (0,_undo_js__WEBPACK_IMPORTED_MODULE_1__.updateHistory)();
+      document.querySelector("#doodle-active-icon").classList.add("hide");
       (0,_index__WEBPACK_IMPORTED_MODULE_0__.showCurrentLayerInfo)(_index__WEBPACK_IMPORTED_MODULE_0__.canvas.getObjects());
       _index__WEBPACK_IMPORTED_MODULE_0__.canvas.isDrawingMode = false;
     }
@@ -32256,11 +32277,12 @@ function undo() {
     );
     return;
   }
-
   if (canvasHistory.undoFinishedStatus) {
     canvasHistory.undoFinishedStatus = false;
     canvasHistory.undoStatus = true;
+    const start = performance.now();
     _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.loadFromJSON(canvasHistory.state[canvasHistory.currentStateIndex - 1], () => {
+      const end = performance.now();
       setCustomObjectBorders();
       _index_js__WEBPACK_IMPORTED_MODULE_0__.canvas.renderAll();
       canvasHistory.undoStatus = false;
@@ -32417,4 +32439,4 @@ function setCustomObjectBorders() {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=bundle5417b4bef9a546fa6d7c.js.map
+//# sourceMappingURL=bundle36526e3178648d776a67.js.map

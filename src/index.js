@@ -222,6 +222,11 @@ export function showSelectionOnLayerInfoList() {
 canvas.on("selection:created", onObjectSelected);
 canvas.on("selection:updated", onObjectSelected);
 
+// 画画时，每画一笔就更新一次历史数据
+canvas.on("path:created", () => {
+  updateHistory();
+});
+
 canvas.on("object:modified", () => {
   setLayerData(canvas.getObjects());
   showCurrentLayerInfo();

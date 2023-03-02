@@ -11,8 +11,10 @@ let currentOpenningLabel = document.querySelector(".tab.active");
 
 tabs.forEach((tab) => {
   tab.addEventListener("click", function () {
+    document.querySelector("#text-active-icon").classList.add("hide");
+
     if (canvas.isDrawingMode === true) {
-      updateHistory();
+      document.querySelector("#doodle-active-icon").classList.add("hide");
       showCurrentLayerInfo(canvas.getObjects());
       canvas.isDrawingMode = false;
     }

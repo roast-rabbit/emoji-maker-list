@@ -43,11 +43,12 @@ export function undo() {
     );
     return;
   }
-
   if (canvasHistory.undoFinishedStatus) {
     canvasHistory.undoFinishedStatus = false;
     canvasHistory.undoStatus = true;
+    const start = performance.now();
     canvas.loadFromJSON(canvasHistory.state[canvasHistory.currentStateIndex - 1], () => {
+      const end = performance.now();
       setCustomObjectBorders();
       canvas.renderAll();
       canvasHistory.undoStatus = false;

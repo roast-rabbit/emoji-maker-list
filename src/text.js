@@ -13,14 +13,23 @@ const addTextToCanvas = document.querySelector("#add-text-to-canvas");
 
 let color = "#000";
 const textColor = document.querySelector("#text-color");
+
+console.log(document.querySelector('label[for="text-color"]'));
+
+document.querySelector('label[for="text-color"]').style = `border:1px solid ${color}`;
+
 let textToAdd;
 
 textColor.addEventListener("input", (e) => {
   [textToAdd] = canvas.getObjects().filter((object) => object.type === "i-text");
-  console.log(textToAdd);
+
+  textColor.style = "border:1px solid black";
   color = e.target.value;
+  document.querySelector('label[for="text-color"]').style = `border:1px solid ${color}`;
 
   if (textToAdd) {
+    textColor.style.border = `1px solid ${color}`;
+
     textToAdd.set({ fill: color });
     canvas.renderAll();
     setLayerData(canvas.getObjects());
@@ -31,11 +40,8 @@ textColor.addEventListener("input", (e) => {
   }
 });
 
-// input.addEventListener("input", (e) => {
-//   text = input.value;
-// });
-
 addTextToCanvas.addEventListener("click", () => {
+  document.querySelector('#text-active-icon').classList.remove('hide')
   if (!textToAdd) {
     textToAdd = new fabric.IText(" ", {
       fontSize: 24,
@@ -43,7 +49,7 @@ addTextToCanvas.addEventListener("click", () => {
       fontFamily: "Helvetica",
       fill: color,
       strokeWidth: 3,
-      top: 200,
+      top: 250,
       left: 100,
       onCanvasEditing: true,
       borderColor: "#0c8ce9",
@@ -56,7 +62,6 @@ addTextToCanvas.addEventListener("click", () => {
     textToAdd.enterEditing();
 
     canvas.on("text:changed", function (e) {
-      console.log(canvas.getObjects());
       setLayerData(canvas.getObjects());
 
       showCurrentLayerInfo(layerData);
@@ -64,7 +69,5 @@ addTextToCanvas.addEventListener("click", () => {
       updateHistory();
       canvas.setActiveObject(textToAdd);
     });
-    // canvas.setActiveObject(textToAdd);
-    // canvas.renderAll();
   }
 });
