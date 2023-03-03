@@ -11,14 +11,14 @@ let text = "";
 
 const addTextToCanvas = document.querySelector("#add-text-to-canvas");
 
-let color = "#000";
+export let color = "#000";
 const textColor = document.querySelector("#text-color");
 
 console.log(document.querySelector('label[for="text-color"]'));
 
 document.querySelector('label[for="text-color"]').style = `border:1px solid ${color}`;
 
-let textToAdd;
+export let textToAdd;
 
 textColor.addEventListener("input", (e) => {
   [textToAdd] = canvas.getObjects().filter((object) => object.type === "i-text");
@@ -41,33 +41,35 @@ textColor.addEventListener("input", (e) => {
 });
 
 addTextToCanvas.addEventListener("click", () => {
-  document.querySelector('#text-active-icon').classList.remove('hide')
-  if (!textToAdd) {
-    textToAdd = new fabric.IText(" ", {
-      fontSize: 24,
-      padding: 6,
-      fontFamily: "Helvetica",
-      fill: color,
-      strokeWidth: 3,
-      top: 250,
-      left: 100,
-      onCanvasEditing: true,
-      borderColor: "#0c8ce9",
-      cornerColor: "#0c8ce9",
-      cornerSize: 10,
-      transparentCorners: false,
-    });
+  document.querySelector("#text-active-icon").classList.remove("hide");
 
-    canvas.add(textToAdd);
-    textToAdd.enterEditing();
+  textToAdd = new fabric.IText(" ", {
+    fontSize: 24,
+    padding: 6,
+    fontFamily: "Helvetica",
+    fill: color,
+    strokeWidth: 3,
+    top: 250,
+    left: 100,
+    onCanvasEditing: true,
+    borderColor: "#0c8ce9",
+    cornerColor: "#0c8ce9",
+    cornerSize: 10,
+    transparentCorners: false,
+  });
+  textToAdd.caching = false;
+  // console.log(textToAdd);
+  canvas.add(textToAdd);
+  textToAdd.enterEditing();
+  // textToAdd = null;
 
-    canvas.on("text:changed", function (e) {
-      setLayerData(canvas.getObjects());
+  canvas.on("text:changed", function (e) {
+    canvas.renderAll();
+    setLayerData(canvas.getObjects());
 
-      showCurrentLayerInfo(layerData);
-      showSelectionOnLayerInfoList();
-      updateHistory();
-      canvas.setActiveObject(textToAdd);
-    });
-  }
+    showCurrentLayerInfo(layerData);
+    showSelectionOnLayerInfoList();
+    updateHistory();
+    canvas.setActiveObject(textToAdd);
+  });
 });

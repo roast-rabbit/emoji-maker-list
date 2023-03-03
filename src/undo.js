@@ -1,4 +1,5 @@
 import { canvas, showCurrentLayerInfo, showSelectionOnLayerInfoList } from "./index.js";
+import { color } from "./text.js";
 
 const canvasHistory = {
   state: [],
@@ -46,14 +47,19 @@ export function undo() {
   if (canvasHistory.undoFinishedStatus) {
     canvasHistory.undoFinishedStatus = false;
     canvasHistory.undoStatus = true;
-    const start = performance.now();
+    canvas.clear();
     canvas.loadFromJSON(canvasHistory.state[canvasHistory.currentStateIndex - 1], () => {
-      const end = performance.now();
       setCustomObjectBorders();
       canvas.renderAll();
       canvasHistory.undoStatus = false;
       canvasHistory.currentStateIndex--;
       canvasHistory.undoFinishedStatus = true;
+      console.log(canvas.getObjects());
+
+      const [oldText] = canvas.getObjects().filter((object, i) => {
+        return object.type === "i-text";
+      });
+      oldText.editable = false;
 
       showCurrentLayerInfo();
       showSelectionOnLayerInfoList();

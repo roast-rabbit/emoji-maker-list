@@ -14,6 +14,7 @@ import "./css/styles.css";
 import { currentMode, modes } from "./drawing.js";
 import "./toggleTab.js";
 import "./download.js";
+import "fabric-history";
 /**
  *
  * @param {string} id
@@ -31,6 +32,8 @@ const initCanvas = (id) => {
 };
 
 export let canvas = initCanvas("c");
+// canvas.historyInit();
+
 canvas.setBackgroundColor(null, canvas.renderAll.bind(canvas));
 
 addDeleteControl();
@@ -185,6 +188,7 @@ document.querySelector("#clear-all").addEventListener("click", () => {
 // });
 
 document.getElementById("undo").addEventListener("click", () => {
+  canvas.clear();
   undo();
 });
 
