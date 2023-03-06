@@ -56,10 +56,12 @@ export function undo() {
       canvasHistory.undoFinishedStatus = true;
       console.log(canvas.getObjects());
 
-      const [oldText] = canvas.getObjects().filter((object, i) => {
+      const oldText = canvas.getObjects().filter((object, i) => {
         return object.type === "i-text";
       });
-      oldText.editable = false;
+      oldText.forEach((text) => {
+        text.editable = false;
+      });
 
       showCurrentLayerInfo();
       showSelectionOnLayerInfoList();

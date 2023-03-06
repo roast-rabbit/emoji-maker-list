@@ -69,7 +69,7 @@ addTextToCanvas.addEventListener("click", () => {
 
     showCurrentLayerInfo(layerData);
     showSelectionOnLayerInfoList();
-    updateHistory();
+    // updateHistory();
     canvas.setActiveObject(textToAdd);
   });
 });

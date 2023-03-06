@@ -1,4 +1,5 @@
 import { canvas } from "./index.js";
+import axios from "axios";
 
 function savePng(uri, name) {
   const link = document.createElement("a");
@@ -39,3 +40,18 @@ document.getElementById("to-png").addEventListener("click", () => {
 document.getElementById("to-svg").addEventListener("click", () => {
   saveSvg(canvas.toSVG());
 });
+
+let jsonData;
+
+document.getElementById("to-json").addEventListener("click", (e) => {
+  jsonData = JSON.stringify(canvas);
+  console.log(jsonData);
+  return false;
+});
+document.querySelector("#render-canvas-from-json").addEventListener("click", () => {
+  renderCanvasFromJson(jsonData);
+});
+function renderCanvasFromJson(jsonData) {
+  canvas.clear();
+  canvas.loadFromJSON(jsonData);
+}
