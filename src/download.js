@@ -55,3 +55,16 @@ function renderCanvasFromJson(jsonData) {
   canvas.clear();
   canvas.loadFromJSON(jsonData);
 }
+
+export function readData() {
+  fetch("http://localhost:3000/canvas")
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data[0]);
+      renderCanvasFromJson(data[0]);
+    });
+}
+
+readData();
