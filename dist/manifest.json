@@ -1,6 +1,6 @@
 {
-  "main.css": "auto/main22cf28185513fc061440.css",
-  "main.js": "auto/bundle22cf28185513fc061440.js",
+  "main.css": "auto/main457a62aaaed65f96d638.css",
+  "main.js": "auto/bundle457a62aaaed65f96d638.js",
   "index.html": "auto/index.html",
   "dict-web.css": "auto/dict-web.css",
   "jquery-2.1.4.min.js": "auto/jquery-2.1.4.min.js",
@@ -48,9 +48,11 @@
   "assets/hat/hat-3.svg": "auto/assets/hat/hat-3.svg",
   "assets/eyes/eyes-8.svg": "auto/assets/eyes/eyes-8.svg",
   "assets/eyes/eyes-1.svg": "auto/assets/eyes/eyes-1.svg",
+  "assets/eyes/eyes-19.svg": "auto/assets/eyes/eyes-19.svg",
   "assets/eyes/eyes-15.svg": "auto/assets/eyes/eyes-15.svg",
   "assets/hat/hat-5.svg": "auto/assets/hat/hat-5.svg",
   "assets/mouth/mouth-14.svg": "auto/assets/mouth/mouth-14.svg",
+  "assets/mouth/mouth-22.svg": "auto/assets/mouth/mouth-22.svg",
   "assets/decorations/decorations-13.svg": "auto/assets/decorations/decorations-13.svg",
   "assets/decorations/decorations-2.svg": "auto/assets/decorations/decorations-2.svg",
   "assets/decorations/decorations-3.svg": "auto/assets/decorations/decorations-3.svg",
@@ -66,9 +68,8 @@
   "assets/decorations/decorations-0.svg": "auto/assets/decorations/decorations-0.svg",
   "assets/eyes/eyes-14.svg": "auto/assets/eyes/eyes-14.svg",
   "assets/eyebrow/eyebrow-1.svg": "auto/assets/eyebrow/eyebrow-1.svg",
-  "assets/mouth/mouth-21.svg": "auto/assets/mouth/mouth-21.svg",
   "assets/mouth/mouth-16.svg": "auto/assets/mouth/mouth-16.svg",
-  "assets/mouth/mouth-22.svg": "auto/assets/mouth/mouth-22.svg",
+  "assets/mouth/mouth-21.svg": "auto/assets/mouth/mouth-21.svg",
   "assets/hat/hat-0.svg": "auto/assets/hat/hat-0.svg",
   "assets/decorations/decorations-5.svg": "auto/assets/decorations/decorations-5.svg",
   "assets/icons/face-smile-regular.svg": "auto/assets/icons/face-smile-regular.svg",
@@ -99,6 +100,6 @@
   "assets/droplet/droplet-0.svg": "auto/assets/droplet/droplet-0.svg",
   "assets/sweat/sweat-0.svg": "auto/assets/sweat/sweat-0.svg",
   "assets/droplet/droplet-3.svg": "auto/assets/droplet/droplet-3.svg",
-  "maincss.map": "auto/main22cf28185513fc061440.css.map",
-  "bundljs.map": "auto/bundle22cf28185513fc061440.js.map"
+  "maincss.map": "auto/main457a62aaaed65f96d638.css.map",
+  "bundljs.map": "auto/bundle457a62aaaed65f96d638.js.map"
 }
