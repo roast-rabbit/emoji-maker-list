@@ -1,6 +1,6 @@
 {
-  "main.css": "auto/mainf9ddae47aeec1269c58f.css",
-  "main.js": "auto/bundlef9ddae47aeec1269c58f.js",
+  "main.css": "auto/main22cf28185513fc061440.css",
+  "main.js": "auto/bundle22cf28185513fc061440.js",
   "index.html": "auto/index.html",
   "dict-web.css": "auto/dict-web.css",
   "jquery-2.1.4.min.js": "auto/jquery-2.1.4.min.js",
@@ -61,6 +61,7 @@
   "assets/decorations/decorations-10.svg": "auto/assets/decorations/decorations-10.svg",
   "assets/eyes/eyes-7.svg": "auto/assets/eyes/eyes-7.svg",
   "assets/eyes/eyes-2.svg": "auto/assets/eyes/eyes-2.svg",
+  "assets/eyes/eyes-18.svg": "auto/assets/eyes/eyes-18.svg",
   "assets/eyebrow/eyebrow-0.svg": "auto/assets/eyebrow/eyebrow-0.svg",
   "assets/decorations/decorations-0.svg": "auto/assets/decorations/decorations-0.svg",
   "assets/eyes/eyes-14.svg": "auto/assets/eyes/eyes-14.svg",
@@ -98,6 +99,6 @@
   "assets/droplet/droplet-0.svg": "auto/assets/droplet/droplet-0.svg",
   "assets/sweat/sweat-0.svg": "auto/assets/sweat/sweat-0.svg",
   "assets/droplet/droplet-3.svg": "auto/assets/droplet/droplet-3.svg",
-  "maincss.map": "auto/mainf9ddae47aeec1269c58f.css.map",
-  "bundljs.map": "auto/bundlef9ddae47aeec1269c58f.js.map"
+  "maincss.map": "auto/main22cf28185513fc061440.css.map",
+  "bundljs.map": "auto/bundle22cf28185513fc061440.js.map"
 }
