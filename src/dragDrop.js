@@ -36,7 +36,7 @@ const handleDrop = () => {
 
   [...listElements].reverse().forEach((element, index) => {
     element.dataset.index = index;
-    element.getElementsByTagName("div")[1].textContent = `Layer ${
+    element.querySelector("div div:nth-child(2)").textContent = `Layer ${
       [...listElements].length - index
     }`;
   });
