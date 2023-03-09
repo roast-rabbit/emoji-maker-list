@@ -20,8 +20,8 @@ const swap = function (nodeA, nodeB) {
   parentA.insertBefore(nodeB, siblingA);
 };
 
-const handleDrop = () => {
-  if (!isMoving) {
+const handleDrop = (eventType) => {
+  if (eventType === "touchend" && !isMoving) {
     return;
   }
   isMoving = false;
@@ -88,8 +88,8 @@ const handleDragover = (e) => {
   }
 };
 
-container.addEventListener("drop", handleDrop);
-container.addEventListener("touchend", handleDrop);
+container.addEventListener("drop", () => handleDrop("drop"));
+container.addEventListener("touchend", () => handleDrop("touchend"));
 
 container.addEventListener("dragover", handleDragover);
 container.addEventListener("touchmove", handleDragover);
