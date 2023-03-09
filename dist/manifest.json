@@ -1,9 +1,9 @@
 {
-  "main.css": "auto/main457a62aaaed65f96d638.css",
-  "main.js": "auto/bundle457a62aaaed65f96d638.js",
-  "index.html": "auto/index.html",
+  "main.css": "auto/main0e64591e39c04eb34a97.css",
+  "main.js": "auto/bundle0e64591e39c04eb34a97.js",
   "dict-web.css": "auto/dict-web.css",
   "jquery-2.1.4.min.js": "auto/jquery-2.1.4.min.js",
+  "index.html": "auto/index.html",
   "index1.js": "auto/index1.js",
   "assets/decorations/decorations-21.svg": "auto/assets/decorations/decorations-21.svg",
   "assets/decorations/decorations-22.svg": "auto/assets/decorations/decorations-22.svg",
@@ -99,7 +99,5 @@
   "assets/face/face-0.svg": "auto/assets/face/face-0.svg",
   "assets/droplet/droplet-0.svg": "auto/assets/droplet/droplet-0.svg",
   "assets/sweat/sweat-0.svg": "auto/assets/sweat/sweat-0.svg",
-  "assets/droplet/droplet-3.svg": "auto/assets/droplet/droplet-3.svg",
-  "maincss.map": "auto/main457a62aaaed65f96d638.css.map",
-  "bundljs.map": "auto/bundle457a62aaaed65f96d638.js.map"
+  "assets/droplet/droplet-3.svg": "auto/assets/droplet/droplet-3.svg"
 }
