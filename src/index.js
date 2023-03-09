@@ -155,7 +155,6 @@ document.addEventListener("keydown", function (event) {
 });
 
 export function showCurrentLayerInfo(layerData, newOrder) {
-  console.log(addDeleteControl.deleteIcon);
   const layerList = document.querySelector("#layer-list");
   layerList.innerHTML = "";
   const obejcts = layerData ? layerData : canvas.getObjects();

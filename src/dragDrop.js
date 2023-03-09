@@ -21,6 +21,10 @@ const swap = function (nodeA, nodeB) {
 };
 
 const handleDrop = () => {
+  if (!isMoving) {
+    return;
+  }
+  isMoving = false;
   const [textToAdd] = canvas.getObjects().filter((object) => {
     return object.type === "i-text";
   });
@@ -132,6 +136,8 @@ let isTouching = false;
 let touchingStartYPosition;
 let touchingPosition;
 
+let isMoving = false;
+
 container.addEventListener("touchstart", (e) => {
   e.preventDefault();
   if (e.target.dataset.label === "delete") {
@@ -162,6 +168,7 @@ container.addEventListener("touchstart", (e) => {
 });
 
 container.addEventListener("touchmove", (e) => {
+  isMoving = true;
   draggingElementShadow.style.top = `${
     touchingPosition + e.changedTouches[0].pageY - touchingStartYPosition
   }px`;
@@ -169,9 +176,19 @@ container.addEventListener("touchmove", (e) => {
 
 container.addEventListener("touchend", (e) => {
   e.preventDefault();
+
+  // console.log("isMoving:", isMoving);
+
   isTouching = false;
 
   container.querySelector("#container #dragging-element-shadow")?.remove();
   touchingStartYPosition = null;
   touchingPosition = null;
+
+  // if (isMoving === false) {
+  //   const selectedLayer = e.target.closest("li");
+  //   const selectedLayerIndex = selectedLayer.dataset.index;
+  //   setActiveObjectOnCanvas(selectedLayerIndex);
+  // }
+  // isMoving = false;
 });
