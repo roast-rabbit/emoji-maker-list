@@ -181,7 +181,7 @@ document.querySelector("#container ul").addEventListener("click", (e) => {
     deleteLayerByIndex(index);
   }
 });
-function deleteLayerByIndex(index) {
+export function deleteLayerByIndex(index) {
   canvas.remove(canvas.getObjects()[index]);
   updateHistory();
   canvas.renderAll();

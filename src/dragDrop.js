@@ -1,4 +1,11 @@
-import { canvas, layerData, setActiveObjectOnCanvas, setLayerData, updateCanvas } from "./index.js";
+import {
+  canvas,
+  layerData,
+  setActiveObjectOnCanvas,
+  setLayerData,
+  updateCanvas,
+  deleteLayerByIndex,
+} from "./index.js";
 
 const container = document.querySelector("#layer-list");
 
@@ -127,6 +134,11 @@ let touchingPosition;
 
 container.addEventListener("touchstart", (e) => {
   e.preventDefault();
+  if (e.target.dataset.label === "delete") {
+    const index = e.target.closest("li").dataset.index;
+    deleteLayerByIndex(index);
+    return;
+  }
 
   isTouching = true;
 
@@ -142,7 +154,7 @@ container.addEventListener("touchstart", (e) => {
 
   draggingElementShadow.id = "dragging-element-shadow";
 
-  draggingElementShadow.style = `background: aliceblue; width:100%; opacity: 0.9; display: flex; align-items: center; height:42px; position: absolute;top:${draggingElementShadowInitialY}px; left:0; z-index:1; }`;
+  draggingElementShadow.style = `background: aliceblue; width:100%; opacity: 0.9; display: flex; justify-content: space-between; align-items: center; height:42px; position: absolute;top:${draggingElementShadowInitialY}px; left:0; z-index:1; }`;
   draggingElementShadow.classList.add("shadow");
   draggingElementShadow.classList.remove("draggable");
 
