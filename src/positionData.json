@@ -1,13 +1,28 @@
 {
   "face": [
-    {
-      "top": 0,
-      "left": 0
-    },
-    {
-      "top": 0,
-      "left": 0
-    }
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 },
+    { "top": 0, "left": 0 }
   ],
   "mouth": [
     { "top": 130.56, "left": 69.45 },
