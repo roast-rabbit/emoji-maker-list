@@ -4,9 +4,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 const WebpackObfuscator = require("webpack-obfuscator");
 const TerserPlugin = require("terser-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const config = {
   entry: "./src/index.js",
@@ -23,32 +23,9 @@ const config = {
     new CleanWebpackPlugin(),
     new WebpackManifestPlugin(),
     new CopyPlugin({
-      patterns: [
-        { from: path.resolve(__dirname, "src/assets"), to: path.resolve(__dirname, "dist/assets") },
-        {
-          from: path.resolve(__dirname, "src/positionData.json"),
-          to: path.resolve(__dirname, "dist/positionData.json"),
-        },
-        {
-          from: path.resolve(__dirname, "src/css/dict-web.css"),
-          to: path.resolve(__dirname, "dist/dict-web.css"),
-        },
-        {
-          from: path.resolve(__dirname, "src/index1.js"),
-          to: path.resolve(__dirname, "dist/index1.js"),
-        },
-        {
-          from: path.resolve(__dirname, "src/jquery-2.1.4.min.js"),
-          to: path.resolve(__dirname, "dist/jquery-2.1.4.min.js"),
-        },
-      ],
+      patterns: [{ from: "src/css/dict-web.css", to: path.resolve(__dirname, "dist") }],
     }),
-    // new WebpackObfuscator({
-    //   rotateStringArray: true,
-    // }),
   ],
-  // mode: "production",
-  // devtool: "inline-source-map",
   watch: true,
   devServer: {
     port: 8080,
@@ -61,16 +38,6 @@ const config = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
-      // {
-      //   test: /\.js$/,
-      //   enforce: "post",
-      //   use: {
-      //     loader: WebpackObfuscator.loader,
-      //     options: {
-      //       rotateStringArray: true,
-      //     },
-      //   },
-      // },
     ],
   },
   optimization: {
@@ -82,24 +49,5 @@ module.exports = (env, argv) => {
   if (argv.mode === "development") {
     config.devtool = "source-map";
   }
-
-  // if (argv.mode === "production") {
-  //   config.plugins.push(
-  //     new WebpackObfuscator({
-  //       rotateStringArray: true,
-  //     })
-  //   );
-  //   config.module.rules.push({
-  //     test: /\.js$/,
-  //     enforce: "post",
-  //     use: {
-  //       loader: WebpackObfuscator.loader,
-  //       options: {
-  //         rotateStringArray: true,
-  //       },
-  //     },
-  //   });
-  // }
-
   return config;
 };
